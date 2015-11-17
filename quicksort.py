@@ -47,9 +47,7 @@ class QuickSort:
         return j
 
     def swap(self, a, i, j):
-        temp = a[i]
-        a[i] = a[j]
-        a[j] = temp
+        a[i], a[j] = a[j], a[i]
 
     def isSorted(self, a):
         """ test if input array a is sorted """
@@ -62,3 +60,9 @@ class QuickSort:
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
+    a = [0] * 100
+    s = QuickSort()
+    for i in range(0, len(a)):
+        a[i] = int(random() * 100)
+    s.sort(a)
+    print(a)
