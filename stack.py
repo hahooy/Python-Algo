@@ -48,8 +48,10 @@ class StackList:
         if self.isEmpty():
             print("stack underflow")
         else:
+            ret = self.head
             self.head = self.head.next
             self.size -= 1
+            return ret.key
 
     def isEmpty(self):
         return self.size == 0
@@ -68,5 +70,5 @@ if __name__ == "__main__":
     stack.push(5)
     stack.push(11)
     stack.push(2)
-    stack.pop()
+    print(stack.pop())
     print(stack)
