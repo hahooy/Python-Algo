@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 def findpivot(a):
     """ find the index of the pivot element in a, in which the
     elements ascend then descend in values """
