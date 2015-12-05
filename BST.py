@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 class BST:
     class Node:
         def __init__(self, value, left, right):
@@ -11,6 +13,16 @@ class BST:
     def insert(self, value):
         self.root = self.__insert_helper(self.root, value)
 
+    def find(self, value):
+        return self.__find_helper(self.root, value)
+
+    def delete(self, value):
+        node = self.find(value)
+        if node == None:
+            return self.root
+            
+
+
     def __insert_helper(self, root, value):
         if root == None:
             return self.Node(value, None, None)
@@ -20,18 +32,16 @@ class BST:
             root.right = self.__insert_helper(root.right, value)
         return root
 
-    def find(self, value):
-        return self.__find_helper(self.root, value)
     
     def __find_helper(self, root, value):
         if root == None:
-            return False
+            return None
         elif root.value > value:
             return self.__find_helper(root.left, value)
         elif root.value < value:
             return self.__find_helper(root.right, value)
         else:
-            return True
+            return root
 
     def traverse(self, root, s):
         if root == None:
