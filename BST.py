@@ -29,6 +29,7 @@ class BST(object):
             return False
 
     def delete(self, x):
+
         """delete node x from the tree"""        
         
         """if x has two children, swap x with its successor z and delete z recursively"""
