@@ -34,12 +34,6 @@ class BST(object):
         if x is None:
             print("the tree is empty")
             return
-
-        if x.parent is None:
-            self.root = None
-            return
-
-        y = x.parent
         
         """if x has two children, swap x with its successor z and delete z recursively"""
         if x.left is not None and x.right is not None:
@@ -48,7 +42,6 @@ class BST(object):
             self.delete(z)
             return            
         
-        y = x.parent
         # if x has no child, just delete it
         if x.left is None and x.right is None:
             z = None 
@@ -58,13 +51,15 @@ class BST(object):
         else:
             z = x.right
         
-        if y.left is x:
-            y.left = z
+        if x.parent is None:
+            self.root = z
+        elif x.parent.left is x:
+            x.parent.left = z
         else:
-            y.right = z
+            x.parent.right = z
             
         if z is not None:
-            z.parent = y                                                                  
+            z.parent = x.parent
         
     def min(self):
         return self.__min_helper(self.root)
