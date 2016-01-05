@@ -30,6 +30,15 @@ class BST:
 
     def delete(self, x):
         """delete node x from the tree"""
+        
+        if x is None:
+            print("the tree is empty")
+            return
+
+        if x.parent is None:
+            self.root = None
+            return
+
         y = x.parent
         
         if x.left is not None and x.right is not None:
@@ -130,7 +139,7 @@ class BST:
 
     def __str__(self):
         s = self.inorder_traverse(self.root, "")
-        return s
+        return s[1:]
 
 if __name__ == "__main__":
     """unit test"""
