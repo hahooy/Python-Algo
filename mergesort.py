@@ -14,26 +14,20 @@ class MergeSort:
         pass
 
     def sort(self, a):
-        aux = []
-        for i in a:
-            aux.append(0)
+        aux = a[:]
         self.sortHelper(a, aux, 0, len(a) - 1)
 
     def sortHelper(self, a, aux, lo, hi):
         if lo >= hi:
             return
-
         mid = lo + (hi - lo) // 2
         self.sortHelper(a, aux, lo, mid)
         self.sortHelper(a, aux, mid + 1, hi)
         self.merge(a, aux, lo, mid, hi)
-
+        
     def merge(self, a, aux, lo, mid, hi):
-        for i in range(lo, hi + 1):            
-            aux[i] = a[i]
-            
+        aux[lo:hi + 1] = a[lo:hi + 1]
         i, j = lo, mid + 1
-
         for k in range(lo, hi + 1):
             if i > mid:
                 a[k] = aux[j]
@@ -47,8 +41,7 @@ class MergeSort:
             else:
                 a[k] = aux[j]
                 j += 1
-        assert(self.__isSorted__(a, lo, hi))
-
+        
     def __isSorted__(self, a, lo, hi):
         for i in range(lo + 1, hi + 1):
             if a[i] < a[i-1]:

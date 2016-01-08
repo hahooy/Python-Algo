@@ -5,7 +5,7 @@ Created on Dec 9, 2015
 '''
 #! /usr/bin/env python3
 
-class BST(object):
+class BST:
     class Node:
         def __init__(self, value, left, right, parent=None):
             self.value = value
@@ -29,21 +29,17 @@ class BST(object):
             return False
 
     def delete(self, x):
-
-        """delete node x from the tree"""        
+        """delete node x from the tree"""
+        y = x.parent
         
-        """if x has two children, swap x with its successor z and delete z recursively"""
         if x.left is not None and x.right is not None:
             z = self.succ(x)
             x.value = z.value
             self.delete(z)
             return            
         
-        y = x.parent
-        # if x has no child, just delete it
         if x.left is None and x.right is None:
-            z = None 
-        # if x has one child, unlinked x from the tree
+            z = None
         elif x.left is not None and x.right is None:
             z = x.left        
         else:

@@ -1,4 +1,4 @@
-""" binary search algorithm """
+""" binary search algorithm, O(log n) time complexity """
 
 class BinarySearch:
     def search(self, a, k):
@@ -7,12 +7,11 @@ class BinarySearch:
     def searchHelper(self, a, k, lo, hi):
         if lo > hi:
             return -1
-
         mid = lo + (hi - lo) // 2
-        if k < a[mid]:
+        if a[k] < a[mid]:
             return self.searchHelper(a, k, lo, mid - 1)
-        elif k > a[mid]:
-            return self.searchHelper(a, k, mid + 1, hi)
+        elif a[k] > a[mid]:
+            return self.searchHelper(a, k, mid + 1, hi) 
         else:
             return mid
 

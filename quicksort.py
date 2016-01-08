@@ -1,6 +1,6 @@
 """
 >>> import quicksort
->>> a = [5,4,3,2,1]
+>>> a = [5,4,3,2,1,5,9,2,1,3]
 >>> q = quicksort.QuickSort()
 >>> q.sort(a)
 >>> q.isSorted(a)
@@ -17,35 +17,29 @@ class QuickSort:
         self.sorthelper(a, 0, len(a) - 1)
         
     def sorthelper(self, a, lo, hi):
-        if lo >= hi: ### no need to sort an array with less than one element
+        if lo >= hi:
             return
-        pivot_index = lo + int(random() * (hi + 1 - lo))
+        pivot_index = lo + int(random() * (hi - lo + 1))
         self.swap(a, lo, pivot_index)
         j = self.partition(a, lo, hi)
         self.sorthelper(a, lo, j - 1)
         self.sorthelper(a, j + 1, hi)
 
     def partition(self, a, lo, hi):
-        """ partition function, return the index of partition element """
-        pivot = a[lo] ### pick the first element as the pivot
-        i, j = lo, hi + 1
-
+        pivot = a[lo]
+        i, j = lo + 1, hi
         while True:
-            while i < hi:
+            while i < hi and a[i] < pivot:
                 i += 1
-                if a[i] >= pivot:
-                    break
-            while j > lo:
+            while j > lo and a[j] > pivot:
                 j -= 1
-                if a[j] <= pivot:
-                    break
             if i >= j:
-                break
+                break  
             self.swap(a, i, j)
-
+            i, j = i + 1, j - 1
         self.swap(a, lo, j)
         return j
-
+    
     def swap(self, a, i, j):
         a[i], a[j] = a[j], a[i]
 
@@ -60,7 +54,7 @@ class QuickSort:
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
-    a = [0] * 100
+    a = [0] * 1000
     s = QuickSort()
     for i in range(0, len(a)):
         a[i] = int(random() * 100)
