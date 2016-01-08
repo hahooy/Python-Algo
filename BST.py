@@ -30,7 +30,10 @@ class BST:
 
     def delete(self, x):
         """delete node x from the tree"""
-        y = x.parent
+
+        if x is None:
+            print("the tree is empty")
+            return
         
         if x.left is not None and x.right is not None:
             z = self.succ(x)
@@ -38,6 +41,7 @@ class BST:
             self.delete(z)
             return            
         
+        # if x has no child, just delete it
         if x.left is None and x.right is None:
             z = None
         elif x.left is not None and x.right is None:
@@ -45,13 +49,15 @@ class BST:
         else:
             z = x.right
         
-        if y.left is x:
-            y.left = z
+        if x.parent is None:
+            self.root = z
+        elif x.parent.left is x:
+            x.parent.left = z
         else:
-            y.right = z
+            x.parent.right = z
             
         if z is not None:
-            z.parent = y                                                                  
+            z.parent = x.parent
         
     def min(self):
         return self.__min_helper(self.root)
@@ -130,7 +136,7 @@ class BST:
 
     def __str__(self):
         s = self.inorder_traverse(self.root, "")
-        return s
+        return s[1:]
 
 if __name__ == "__main__":
     """unit test"""
